@@ -117,6 +117,8 @@ public class Student implements Comparable<Student> {
                 int value = 0;
             };
 
+            requirements.forEach(course -> ectsObj.value += course.getEcts());
+
             return ectsObj.value;
         }
 
@@ -149,6 +151,8 @@ public class Student implements Comparable<Student> {
             var ectsObj = new Object() {
                 int value = 0;
             };
+
+            requirements.forEach(course -> {if (hasPassed(course)) {ectsObj.value += course.getEcts();}});
 
             return ectsObj.value;
         }
