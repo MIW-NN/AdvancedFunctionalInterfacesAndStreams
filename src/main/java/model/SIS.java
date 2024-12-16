@@ -240,6 +240,8 @@ public class SIS {
         Map<Student, Integer> map = this.calculateRequiredEctsPerStudent();
         // TODO-1 use map.replaceAll to calculate the remaining ects for each student
 
+        map.replaceAll((student, requiredECTS) -> requiredECTS - student.getEarnedECTS());
+
         return map;
     }
 
@@ -255,8 +257,16 @@ public class SIS {
         Map<Exam, Integer> maxParticipation = new TreeMap<>();
 
         // TODO-1 calculate maximum expected participation per exam using .forEach()
-        if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
+        if (SIS.solutionVariant == SolutionVariant.FOR_LOOP) {
+            for (Exam allExam : findAllExams(filter)) {
+                maxParticipation.put(allExam,
+                        getNStudentsRequired(allExam.getCourse()) - getNStudentsPassed(allExam.getCourse()));
+            }
+        }
 
+        if (SIS.solutionVariant == SolutionVariant.FOREACH) {
+            findAllExams(filter).forEach(exam -> maxParticipation.put(exam,
+                    getNStudentsRequired(exam.getCourse()) - getNStudentsPassed(exam.getCourse())));
         }
 
         // TODO-2 calculate maximum expected participation per exam using .stream() and .collect()
