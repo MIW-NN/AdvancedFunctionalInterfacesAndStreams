@@ -197,11 +197,7 @@ public class SIS {
         // TODO-1 build the map of required ects using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
             for (Student student : this.students) {
-                int requiredECTS = 0;
-                for (Course course : student.getRequirements()) {
-                    requiredECTS += course.getEcts();
-                }
-                map.put(student, requiredECTS);
+                map.put(student, student.getRequiredECTS());
             }
         }
 
@@ -224,13 +220,7 @@ public class SIS {
         // TODO-1 build the map of earned ects using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
             for (Student student : students) {
-                int earnedECTS = 0;
-                for (Course requirement : student.getRequirements()) {
-                    if (student.hasPassed(requirement)) {
-                        earnedECTS += requirement.getEcts();
-                    }
-                }
-                map.put(student, earnedECTS);
+                map.put(student, student.getEarnedECTS());
             }
         }
 
