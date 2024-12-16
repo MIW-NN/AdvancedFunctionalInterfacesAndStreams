@@ -6,16 +6,14 @@ import java.util.function.Predicate;
 
 public class SIS {
     // TODO: Choose the correct solution variant
-    // solutionVariant == 0: execute no solution
-    // solutionVariant == 1: execute for-loop solution
-    // solutionVariant > 1: execute .forEach() solution
-    // solutionVariant < 0: execute .stream() solution
-    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
+    public static SolutionVariant solutionVariant = SolutionVariant.FOR_LOOP;
+//    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
+//    public static SolutionVariant solutionVariant = SolutionVariant.STREAM;
 
-    private static Random randomizer = new Random();
+    private static final Random randomizer = new Random();
 
-    private Set<Course> courses;
-    private Set<Student> students;
+    private final Set<Course> courses;
+    private final Set<Student> students;
 
     @Override
     public String toString() {
