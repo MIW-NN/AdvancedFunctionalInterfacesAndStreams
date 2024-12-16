@@ -48,6 +48,9 @@ public class SIS {
             var ref = new Object() {
                 int nStudents = 0;
             };
+
+            students.forEach(student -> {ref.nStudents += student.requires(course) ? 1 : 0;});
+
             return ref.nStudents;
         }
 
@@ -82,6 +85,8 @@ public class SIS {
             var ref = new Object() {
                 int nStudents = 0;
             };
+
+            students.forEach(student -> {ref.nStudents += student.hasPassed(course) ? 1 : 0;});
 
             return ref.nStudents;
         }
