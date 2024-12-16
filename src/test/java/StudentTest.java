@@ -19,9 +19,17 @@ class StudentTest {
         this.course0 = new Course("C00", "Piano voor beginners", 3);
         this.course1 = new Course("C01", "Piano voor gevorderden", 4);
         this.course2 = new Course("C02", "Piano Concert", 6);
+
+        student0.getRequirements().add(this.course1);
+        student0.getRequirements().add(this.course2);
+        student1.getRequirements().add(this.course1);
+        student1.getRequirements().add(this.course2);
+        student2.getRequirements().add(this.course1);
+
         this.exam1a = new Exam("2019-08-25", this.course1);
         this.exam1b = new Exam("2019-09-02", this.course1);
         this.exam2 = new Exam("2019-09-02", this.course2);
+
         this.exam1a.addResult(this.student0, 4.0);
         this.exam1a.addResult(this.student1, 5.5);
         this.exam1b.addResult(this.student0, 7.0);
