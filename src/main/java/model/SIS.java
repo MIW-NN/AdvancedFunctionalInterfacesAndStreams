@@ -72,7 +72,11 @@ public class SIS {
 
         // TODO-1a count the students using a for-loop
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP) {
-
+            for (Student student : this.students) {
+                if (student.hasPassed(course)) {
+                    nStudents++;
+                }
+            }
         }
 
         // TODO-1b count the students using .forEach
