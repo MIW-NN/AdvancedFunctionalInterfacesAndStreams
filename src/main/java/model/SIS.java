@@ -10,7 +10,7 @@ public class SIS {
     // solutionVariant == 1: execute for-loop solution
     // solutionVariant > 1: execute .forEach() solution
     // solutionVariant < 0: execute .stream() solution
-    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
+    public static SolutionVariant solutionVariant = SolutionVariant.FOR_LOOP;
 
     private static Random randomizer = new Random();
 

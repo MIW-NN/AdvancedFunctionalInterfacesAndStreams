@@ -54,7 +54,11 @@ public class Course implements Comparable<Course> {
 
         // TODO-1 determine whether an exam has been scheduled for the given date, using a for-loop
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-
+            for (Exam exam : this.exams) {
+                if (exam.getDate().equals(date)) {
+                    return exam;
+                }
+            }
         }
 
         // TODO-2 determine whether an exam has been scheduled for the given date, using .stream()

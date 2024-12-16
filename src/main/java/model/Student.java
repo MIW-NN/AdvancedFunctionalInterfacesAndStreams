@@ -99,7 +99,9 @@ public class Student implements Comparable<Student> {
 
         // TODO-1a calculate total of required ECTS using a for-loop
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP) {
-
+            for (Course requirement : requirements) {
+                ects += requirement.getEcts();
+            }
         }
 
         // TODO-1b calculate total of required ECTS using a .forEach()
