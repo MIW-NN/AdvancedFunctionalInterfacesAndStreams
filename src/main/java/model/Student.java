@@ -6,13 +6,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Student implements Comparable<Student> {
-    private static Random randomizer = new Random();
+    private static final Random randomizer = new Random();
     private static int lastNumber = 500900000;
 
-    private int number;
+    private final int number;
     private String name;
-    private Set<Course> requirements;
-    private Set<Exam> exams;
+    private final Set<Course> requirements;
+    private final Set<Exam> exams;
 
     public Student(int number) {
         this.number = number;
@@ -38,6 +38,9 @@ public class Student implements Comparable<Student> {
 
     @Override
     public boolean equals(Object o) {
+        if (!(o instanceof Student)) {
+            return false;
+        }
         return this.number == ((Student)o).number;
     }
 
@@ -53,8 +56,6 @@ public class Student implements Comparable<Student> {
 
     /**
      * indicates whether a course is part of the requirements of a model.Student
-     * @param course
-     * @return
      */
     public boolean requires(Course course) {
         return this.requirements.contains(course);
@@ -62,8 +63,6 @@ public class Student implements Comparable<Student> {
 
     /**
      * indicates whether a model.Student has passed a model.Course
-     * @param course
-     * @return
      */
     public boolean hasPassed(Course course) {
         return this.getBestResult(course) >= 5.5;
@@ -71,7 +70,6 @@ public class Student implements Comparable<Student> {
 
     /**
      * retrieves the best model.Exam result of the model.Student for the given model.Course
-     * @param course
      * @return      returns 0.0 if no model.Exam result was registered for the model.Student yet
      */
     public double getBestResult(Course course) {
@@ -103,7 +101,6 @@ public class Student implements Comparable<Student> {
 
     /**
      * Calculates the total number of ECTS of all model.Course requirements of a model.Student
-     * @return
      */
     public int getRequiredECTS() {
         int ects = 0;
@@ -136,7 +133,6 @@ public class Student implements Comparable<Student> {
 
     /**
      * Calculates the total number of earned ECTS of the student from Courses with a passed model.Exam
-     * @return
      */
     public int getEarnedECTS() {
         int ects = 0;

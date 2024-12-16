@@ -11,10 +11,10 @@ public class SIS {
 //    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
     public static SolutionVariant solutionVariant = SolutionVariant.STREAM;
 
-    private static Random randomizer = new Random();
+    private static final Random randomizer = new Random();
 
-    private Set<Course> courses;
-    private Set<Student> students;
+    private final Set<Course> courses;
+    private final Set<Student> students;
 
     @Override
     public String toString() {
@@ -28,9 +28,6 @@ public class SIS {
 
     /**
      * counts the number of students that have this course as part of their requirements
-     *
-     * @param course
-     * @return
      */
     public int getNStudentsRequired(Course course) {
         int nStudents = 0;
@@ -50,7 +47,7 @@ public class SIS {
                 int nStudents = 0;
             };
 
-            students.forEach(student -> {ref.nStudents += student.requires(course) ? 1 : 0;});
+            students.forEach(student -> ref.nStudents += student.requires(course) ? 1 : 0);
 
             return ref.nStudents;
         }
@@ -67,9 +64,6 @@ public class SIS {
 
     /**
      * counts the number of students that have passed an exam of this course
-     *
-     * @param course
-     * @return
      */
     public int getNStudentsPassed(Course course) {
         int nStudents = 0;
@@ -89,7 +83,7 @@ public class SIS {
                 int nStudents = 0;
             };
 
-            students.forEach(student -> {ref.nStudents += student.hasPassed(course) ? 1 : 0;});
+            students.forEach(student -> ref.nStudents += student.hasPassed(course) ? 1 : 0);
 
             return ref.nStudents;
         }
@@ -154,8 +148,6 @@ public class SIS {
     /**
      * Schedules additional exams for courses in the future.
      * No participation of students will be booked yet and no results are registered
-     *
-     * @param nExams
      */
     public void scheduleAdditionalExams(int nExams) {
         List<Course> courses = new ArrayList<>(this.courses);
@@ -167,18 +159,15 @@ public class SIS {
             courses.set(targetIdx, courses.get(nRemainingCourses));
             courses.set(nRemainingCourses, course);
 
-            Exam exam = new Exam(LocalDate.now().plusDays(50 + randomizer.nextInt(15)), course);
+            new Exam(LocalDate.now().plusDays(50 + randomizer.nextInt(15)), course);
         }
     }
 
     /**
      * finds all Exams in the model.SIS that match a given filter criterium
-     *
-     * @param filter
-     * @return
      */
     public Set<Exam> findAllExams(Predicate<Exam> filter) {
-        Set<Exam> foundExams = new TreeSet<Exam>();
+        Set<Exam> foundExams = new TreeSet<>();
 
         // TODO-1: find all exams using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
@@ -198,8 +187,6 @@ public class SIS {
 
     /**
      * Calculates the total study requirements per model.Student based on their model.Course requirements
-     *
-     * @return
      */
     public Map<Student, Integer> calculateRequiredEctsPerStudent() {
         Map<Student, Integer> map = new HashMap<>();
@@ -224,8 +211,6 @@ public class SIS {
 
     /**
      * Calculates the total number of ects earned per model.Student, based on their model.Exam results
-     *
-     * @return
      */
     public Map<Student, Integer> calculateTotalEarnedEctsPerStudent() {
         Map<Student, Integer> map = new HashMap<>();
@@ -249,8 +234,6 @@ public class SIS {
 
     /**
      * Calculates remaining ECTS to be earned per student based on their study requirements and exam results
-     *
-     * @return
      */
     public Map<Student, Integer> calculateRemainingEctsPerStudent() {
         Map<Student, Integer> map = this.calculateRequiredEctsPerStudent();
@@ -263,10 +246,7 @@ public class SIS {
     /**
      * Calculates the expected maximum participation of a future model.Exam based on current study results.
      * It counts per model.Exam all students that have the model.Course on their requirements,
-     * but not yet passed an model.Exam of the model.Course
-     *
-     * @param filter
-     * @return
+     * but not yet passed a model.Exam of the model.Course
      */
     public Map<Exam, Integer> calculateMaxExamParticipation(Predicate<Exam> filter) {
         Map<Exam, Integer> maxParticipation = new TreeMap<>();
@@ -338,9 +318,6 @@ public class SIS {
 
         /**
          * Builder method to add a course to the model.SIS being build
-         *
-         * @param course
-         * @return
          */
         public Builder addCourse(Course course) {
             this.getOrAdd(course);
@@ -351,10 +328,6 @@ public class SIS {
          * Builder method to add a student to the model.SIS being build
          * Also adds the specified courses to the study requirements of the student
          * Non-existing course codes will also be added to the model.SIS, if needed
-         *
-         * @param student
-         * @param courseCodes
-         * @return
          */
         public Builder addStudent(Student student, String... courseCodes) {
             Student student0 = this.getOrAdd(student);
@@ -366,13 +339,9 @@ public class SIS {
         }
 
         /**
-         * Builder method to add an model.Exam to the specified course in the model.SIS
+         * Builder method to add a model.Exam to the specified course in the model.SIS
          * if the course does not yet exist it will be added first
          * if the course already has an exam on the same day, no additional exam should be added
-         *
-         * @param dateString
-         * @param courseCode
-         * @return
          */
         public Builder addExam(String dateString, String courseCode) {
             this.getOrAdd(dateString, courseCode);
@@ -382,12 +351,6 @@ public class SIS {
         /**
          * Builder method to add an exam result to the model.SIS
          * If a specified model.Exam, model.Course or model.Student is missing, these will first be added
-         *
-         * @param dateString
-         * @param courseCode
-         * @param studentNr
-         * @param grade
-         * @return
          */
         public Builder addResult(String dateString, String courseCode, int studentNr, double grade) {
             Exam exam = this.getOrAdd(dateString, courseCode);
@@ -398,8 +361,6 @@ public class SIS {
 
         /**
          * Complete the model.SIS being build
-         *
-         * @return
          */
         public SIS build() {
             return this.sis;
