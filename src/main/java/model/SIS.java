@@ -196,7 +196,13 @@ public class SIS {
 
         // TODO-1 build the map of required ects using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-
+            for (Student student : this.students) {
+                int requiredECTS = 0;
+                for (Course course : student.getRequirements()) {
+                    requiredECTS += course.getEcts();
+                }
+                map.put(student, requiredECTS);
+            }
         }
 
         // TODO-2 build the map of required ects using .stream()
