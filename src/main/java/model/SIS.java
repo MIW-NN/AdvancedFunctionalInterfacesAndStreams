@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class SIS {
     // TODO: Choose the correct solution variant
@@ -56,7 +57,9 @@ public class SIS {
 
         // TODO-2 count the students using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            nStudents = (int) students.stream()
+                    .filter((student -> student.requires(course)))
+                    .count();
         }
 
         return nStudents;
@@ -93,7 +96,9 @@ public class SIS {
 
         // TODO-2 count the students using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            nStudents = (int) students.stream()
+                    .filter((student -> student.hasPassed(course)))
+                    .count();
         }
 
         return nStudents;
@@ -184,7 +189,9 @@ public class SIS {
 
         // TODO-2: find all exams using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            foundExams = courses.stream()
+                    .flatMap(course -> course.findExams(filter).stream())
+                    .collect(Collectors.toSet());
         }
         return foundExams;
     }
@@ -206,7 +213,10 @@ public class SIS {
 
         // TODO-2 build the map of required ects using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            map = students.stream()
+                    .collect(Collectors.toMap(
+                            student -> student,
+                            Student::getRequiredECTS));
         }
 
         return map;
@@ -229,7 +239,10 @@ public class SIS {
 
         // TODO-2 build the map of required ects using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            map = students.stream()
+                    .collect(Collectors.toMap(
+                            student -> student,
+                            Student::getEarnedECTS));
         }
         return map;
     }
@@ -273,7 +286,10 @@ public class SIS {
 
         // TODO-2 calculate maximum expected participation per exam using .stream() and .collect()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            return findAllExams(filter).stream()
+                    .collect(Collectors.toMap(
+                            exam -> exam,
+                            exam -> getNStudentsRequired(exam.getCourse()) - getNStudentsPassed(exam.getCourse())));
         }
 
         return maxParticipation;
