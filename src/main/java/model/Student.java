@@ -79,7 +79,14 @@ public class Student implements Comparable<Student> {
 
         // TODO-1 calculate best result using a for-loop
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-
+            for (Exam exam : exams) {
+                if (exam.getCourse().equals(course)) {
+                    double result = exam.getResults().get(this);
+                    if (result > bestResult) {
+                        bestResult = result;
+                    }
+                }
+            }
         }
 
         // TODO-2 calculate best result using .stream()
@@ -130,7 +137,11 @@ public class Student implements Comparable<Student> {
 
         // TODO-1a calculate total of earned ECTS using a for-loop
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP) {
-
+            for (Course course : requirements) {
+                if (hasPassed(course)) {
+                    ects += course.getEcts();
+                }
+            }
         }
 
         // TODO-1b calculate total of earned ECTS using .forEach()
