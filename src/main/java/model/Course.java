@@ -82,7 +82,11 @@ public class Course implements Comparable<Course> {
         Set<Exam> foundExams = new TreeSet<>();
         // TODO-1 deliver the set of exams which match the filter using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-            foundExams = exams.stream().filter(filter).collect(Collectors.toSet());
+            for (Exam exam : exams) {
+                if (filter.test(exam)) {
+                    foundExams.add(exam);
+                }
+            }
         }
 
         // TODO-2 deliver the set of exams which match the filter using .stream()
