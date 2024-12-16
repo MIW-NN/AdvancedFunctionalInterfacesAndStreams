@@ -91,7 +91,11 @@ public class Student implements Comparable<Student> {
 
         // TODO-2 calculate best result using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            bestResult = exams.stream()
+                    .filter(exam -> exam.getCourse().equals(course))
+                    .mapToDouble(exam -> exam.getResults().get(this))
+                    .max()
+                    .orElse(0);
         }
 
         return bestResult;
@@ -124,7 +128,7 @@ public class Student implements Comparable<Student> {
 
         // TODO-2 calculate total of required ECTS using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            ects = requirements.stream().mapToInt(Course::getEcts).sum();
         }
 
         return ects;
@@ -159,7 +163,7 @@ public class Student implements Comparable<Student> {
 
         // TODO-2 calculate total of earned ECTS using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            ects = requirements.stream().filter(this::hasPassed).mapToInt(Course::getEcts).sum();
         }
 
         return ects;
