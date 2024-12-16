@@ -47,7 +47,7 @@ class SISTest {
     void T21_checkSISBuilder() {
         assertEquals(4, this.sis.getCourses().size(),"Courses should be unique by code");
         assertEquals(4, this.sis.getStudents().size(),"Students should be unique by number");
-        assertEquals(5, this.sis.findAllExams(x->true).size(),"Exams should be unique by course and date");
+        assertEquals(5, this.sis.findAllExams(x -> true).size(),"Exams should be unique by course and date");
 
         assertEquals(Set.of("Classic piano beginners", "Classic piano advanced", "Piano concert", ""),
                 this.sis.getCourses().stream().map(Course::getTitle)

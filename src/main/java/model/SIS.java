@@ -166,7 +166,9 @@ public class SIS {
 
         // TODO-1: find all exams using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-
+            for (Course course : this.courses) {
+                foundExams.addAll(course.findExams(filter));
+            }
         }
 
         // TODO-2: find all exams using .stream()
