@@ -128,6 +128,14 @@ public class Course implements Comparable<Course> {
                 int gradeCount = 0;
             };
 
+            this.exams.forEach(exam -> exam.getResults().forEach(
+                    (student, grade) -> {ref.gradeSum += grade; ref.gradeCount++;})
+            );
+
+            if (ref.gradeCount > 0) {
+                return ref.gradeSum / ref.gradeCount;
+            }
+            return 0;
         }
 
         // TODO-2 calculate gradeAverage using .stream()
