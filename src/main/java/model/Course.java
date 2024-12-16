@@ -94,7 +94,9 @@ public class Course implements Comparable<Course> {
 
         // TODO-2 deliver the set of exams which match the filter using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            foundExams = this.exams.stream()
+                    .filter(filter)
+                    .collect(Collectors.toSet());
         }
 
         return foundExams;
@@ -144,7 +146,10 @@ public class Course implements Comparable<Course> {
         // TODO-2 calculate gradeAverage using .stream()
         //  (can be done without need of gradeCount)
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            gradeAverage = exams.stream()
+                    .flatMap(exam -> exam.getResults().values().stream())
+                    .mapToDouble(x -> x)
+                    .average().orElse(0);
         }
 
         return gradeAverage;
