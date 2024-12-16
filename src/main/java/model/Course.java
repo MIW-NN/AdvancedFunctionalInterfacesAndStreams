@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Course implements Comparable<Course> {
     private String code;
@@ -81,7 +82,7 @@ public class Course implements Comparable<Course> {
         Set<Exam> foundExams = new TreeSet<>();
         // TODO-1 deliver the set of exams which match the filter using .forEach()
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP || SIS.solutionVariant == SolutionVariant.FOREACH) {
-
+            foundExams = exams.stream().filter(filter).collect(Collectors.toSet());
         }
 
         // TODO-2 deliver the set of exams which match the filter using .stream()
@@ -101,7 +102,19 @@ public class Course implements Comparable<Course> {
 
         // TODO-1a calculate gradeAverage using for-loop iteration
         if (SIS.solutionVariant == SolutionVariant.FOR_LOOP) {
+            double gradeSum = 0.0;
+            int numberOfResults = 0;
 
+            for (Exam exam : exams) {
+                for (Student student : exam.getResults().keySet()) {
+                    gradeSum += exam.getResults().get(student);
+                    numberOfResults++;
+                }
+            }
+
+            if (numberOfResults > 0) {
+                gradeAverage = gradeSum / numberOfResults;
+            }
         }
 
         // TODO-1b calculate gradeAverage using .forEach() and lambda expression
