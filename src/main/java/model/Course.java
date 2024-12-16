@@ -64,7 +64,10 @@ public class Course implements Comparable<Course> {
 
         // TODO-2 determine whether an exam has been scheduled for the given date, using .stream()
         if (SIS.solutionVariant == SolutionVariant.STREAM) {
-
+            return this.exams.stream()
+                    .filter(exam -> exam.getDate().equals(date))
+                    .findFirst()
+                    .orElse(null);
         }
 
         return null;

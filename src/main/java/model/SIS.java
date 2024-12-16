@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 public class SIS {
     // TODO: Choose the correct solution variant
 //    public static SolutionVariant solutionVariant = SolutionVariant.FOR_LOOP;
-    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
-//    public static SolutionVariant solutionVariant = SolutionVariant.STREAM;
+//    public static SolutionVariant solutionVariant = SolutionVariant.FOREACH;
+    public static SolutionVariant solutionVariant = SolutionVariant.STREAM;
 
     private static Random randomizer = new Random();
 
