@@ -16,7 +16,6 @@ class ExamTest {
         Student student0 = new Student(500999003, "L. Jussen");
         Student student1 = new Student(500999004, "A. Jussen");
         Student student2 = new Student(500999001, "W. Soerjadi");
-        Course course0 = new Course("C00", "Piano voor beginners", 3);
         Course course1 = new Course("C01", "Piano voor gevorderden", 4);
         Course course2 = new Course("C02", "Piano Concert", 6);
         this.exam1a = new Exam("2019-08-25", course1);
