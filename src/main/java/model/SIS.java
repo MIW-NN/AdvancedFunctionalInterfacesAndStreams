@@ -239,7 +239,6 @@ public class SIS {
     public Map<Student, Integer> calculateRemainingEctsPerStudent() {
         Map<Student, Integer> map = this.calculateRequiredEctsPerStudent();
         // TODO-1 use map.replaceAll to calculate the remaining ects for each student
-
         map.replaceAll((student, requiredECTS) -> requiredECTS - student.getEarnedECTS());
 
         return map;
