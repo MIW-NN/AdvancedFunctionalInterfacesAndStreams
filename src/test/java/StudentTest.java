@@ -7,9 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-    private Course course0, course1, course2;
-    private Student student0, student1, student2;
-    private Exam exam1a, exam1b, exam2;
+    private Course course0;
+    private Course course1;
+    private Course course2;
+    private Student student0;
+    private Student student1;
+    private Student student2;
 
     @BeforeEach
     public void setup() {
@@ -26,28 +29,28 @@ class StudentTest {
         student1.getRequirements().add(this.course2);
         student2.getRequirements().add(this.course1);
 
-        this.exam1a = new Exam("2019-08-25", this.course1);
-        this.exam1b = new Exam("2019-09-02", this.course1);
-        this.exam2 = new Exam("2019-09-02", this.course2);
+        Exam exam1a = new Exam("2019-08-25", this.course1);
+        Exam exam1b = new Exam("2019-09-02", this.course1);
+        Exam exam2 = new Exam("2019-09-02", this.course2);
 
-        this.exam1a.addResult(this.student0, 4.0);
-        this.exam1a.addResult(this.student1, 5.5);
-        this.exam1b.addResult(this.student0, 7.0);
-        this.exam1b.addResult(this.student1, 9.0);
-        this.exam1b.addResult(this.student2, 4.0);
-        this.exam2.addResult(this.student0, 8.0);
-        this.exam2.addResult(this.student1, 4.0);
+        exam1a.addResult(this.student0, 4.0);
+        exam1a.addResult(this.student1, 5.5);
+        exam1b.addResult(this.student0, 7.0);
+        exam1b.addResult(this.student1, 9.0);
+        exam1b.addResult(this.student2, 4.0);
+        exam2.addResult(this.student0, 8.0);
+        exam2.addResult(this.student1, 4.0);
     }
 
     @Test
-    void T03_checkStudentgetRequiredECTS() {
+    void T03_checkStudentGetRequiredECTS() {
         assertEquals(10, this.student0.getRequiredECTS(), "requiredECTS student0");
         assertEquals(10, this.student1.getRequiredECTS(), "requiredECTS student1");
         assertEquals(4, this.student2.getRequiredECTS(), "requiredECTS student2");
     }
 
     @Test
-    void T04_checkStudentgetEarnedECTS() {
+    void T04_checkStudentGetEarnedECTS() {
         assertEquals(10, this.student0.getEarnedECTS(), "earnedECTS student0");
         assertEquals(4, this.student1.getEarnedECTS(), "earnedECTS student1");
         assertEquals(0, this.student2.getEarnedECTS(), "earnedECTS student2");

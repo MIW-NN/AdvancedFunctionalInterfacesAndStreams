@@ -7,29 +7,28 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ExamTest {
-
-    private Course course0, course1, course2;
-    private Student student0, student1, student2;
-    private Exam exam1a, exam1b, exam2;
+    private Exam exam1a;
+    private Exam exam1b;
+    private Exam exam2;
 
     @BeforeEach
     public void setup() {
-        this.student0 = new Student(500999003, "L. Jussen");
-        this.student1 = new Student(500999004, "A. Jussen");
-        this.student2 = new Student(500999001, "W. Soerjadi");
-        this.course0 = new Course("C00", "Piano voor beginners", 3);
-        this.course1 = new Course("C01", "Piano voor gevorderden", 4);
-        this.course2 = new Course("C02", "Piano Concert", 6);
-        this.exam1a = new Exam("2019-08-25", this.course1);
-        this.exam1b = new Exam("2019-09-02", this.course1);
-        this.exam2 = new Exam("2019-09-02", this.course2);
-        this.exam1a.addResult(this.student0, 4.0);
-        this.exam1a.addResult(this.student1, 5.5);
-        this.exam1b.addResult(this.student0, 7.0);
-        this.exam1b.addResult(this.student1, 9.0);
-        this.exam1b.addResult(this.student2, 4.0);
-        this.exam2.addResult(this.student0, 8.0);
-        this.exam2.addResult(this.student1, 4.0);
+        Student student0 = new Student(500999003, "L. Jussen");
+        Student student1 = new Student(500999004, "A. Jussen");
+        Student student2 = new Student(500999001, "W. Soerjadi");
+        Course course0 = new Course("C00", "Piano voor beginners", 3);
+        Course course1 = new Course("C01", "Piano voor gevorderden", 4);
+        Course course2 = new Course("C02", "Piano Concert", 6);
+        this.exam1a = new Exam("2019-08-25", course1);
+        this.exam1b = new Exam("2019-09-02", course1);
+        this.exam2 = new Exam("2019-09-02", course2);
+        this.exam1a.addResult(student0, 4.0);
+        this.exam1a.addResult(student1, 5.5);
+        this.exam1b.addResult(student0, 7.0);
+        this.exam1b.addResult(student1, 9.0);
+        this.exam1b.addResult(student2, 4.0);
+        this.exam2.addResult(student0, 8.0);
+        this.exam2.addResult(student1, 4.0);
     }
 
     @Test

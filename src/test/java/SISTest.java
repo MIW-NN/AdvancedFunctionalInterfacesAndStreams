@@ -146,30 +146,27 @@ class SISTest {
                 this.sis.calculateTotalEarnedEctsPerStudent();
         Map<Student,Integer> remaining =
                 this.sis.calculateRemainingEctsPerStudent();
-        required.entrySet().forEach(
-                e-> {
-                    Student student = e.getKey();
-                    int requiredECTS = e.getValue();
-                    int earnedECTS = earned.getOrDefault(student,0);
-                    int remainingECTS = remaining.getOrDefault(student,0);
-                    if (requiredECTS != earnedECTS+remainingECTS) {
-                        System.out.printf("%s: required=%d earned=%d remaining=%d\n", student, requiredECTS, earnedECTS, remainingECTS);
-                        System.out.println(student.getRequirements());
-                        System.out.println(student.getRequirements().stream().mapToDouble(student::getBestResult));
-                    }
-                    assertAll(
-                            () -> assertTrue(requiredECTS >= 0,
-                                    "requiredECTS must be greater than or equal to 0, but was " + requiredECTS
-                                            + " for student " + student.getName() + " (" + student.getNumber() + ")" ),
-                            () -> assertTrue(earnedECTS >= 0,
-                                    "earnedECTS must be greater than or equal to 0"),
-                            () -> assertTrue(remainingECTS >= 0,
-                                    "remainingECTS must be greater than or equal to 0"),
-                            () -> assertEquals(requiredECTS,earnedECTS + remainingECTS,
-                                    "error in balance: required = earned + remaining")
-                    );
+        required.forEach((student, value) -> {
+            int requiredECTS = value;
+            int earnedECTS = earned.getOrDefault(student, 0);
+            int remainingECTS = remaining.getOrDefault(student, 0);
+            if (requiredECTS != earnedECTS + remainingECTS) {
+                System.out.printf("%s: required=%d earned=%d remaining=%d\n", student, requiredECTS, earnedECTS, remainingECTS);
+                System.out.println(student.getRequirements());
+                System.out.println(student.getRequirements().stream().mapToDouble(student::getBestResult));
+            }
+            assertAll(
+                    () -> assertTrue(requiredECTS >= 0,
+                            "requiredECTS must be greater than or equal to 0, but was " + requiredECTS
+                                    + " for student " + student.getName() + " (" + student.getNumber() + ")"),
+                    () -> assertTrue(earnedECTS >= 0,
+                            "earnedECTS must be greater than or equal to 0"),
+                    () -> assertTrue(remainingECTS >= 0,
+                            "remainingECTS must be greater than or equal to 0"),
+                    () -> assertEquals(requiredECTS, earnedECTS + remainingECTS,
+                            "error in balance: required = earned + remaining")
+            );
 
-                }
-        );
+        });
     }
 }
