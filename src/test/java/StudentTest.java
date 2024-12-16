@@ -47,14 +47,14 @@ class StudentTest {
     }
 
     @Test
-    void T04_checkStudentgetEarnedECTS() {
+    void T06_checkStudentgetEarnedECTS() {
         assertEquals(10, this.student0.getEarnedECTS(), "earnedECTS student0");
         assertEquals(4, this.student1.getEarnedECTS(), "earnedECTS student1");
         assertEquals(0, this.student2.getEarnedECTS(), "earnedECTS student2");
     }
 
     @Test
-    void T05_checkBestExamResult() {
+    void T04_checkBestExamResult() {
         assertEquals(0.0, this.student0.getBestResult(this.course0));
         assertEquals(7.0, this.student0.getBestResult(this.course1));
         assertEquals(8.0, this.student0.getBestResult(this.course2));
@@ -65,7 +65,7 @@ class StudentTest {
     }
 
     @Test
-    void T06_checkHasPassed() {
+    void T05_checkHasPassed() {
         assertFalse(this.student0.hasPassed(this.course0));
         assertTrue(this.student0.hasPassed(this.course1));
         assertTrue(this.student0.hasPassed(this.course2));
